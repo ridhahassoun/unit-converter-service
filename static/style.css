@@ -1,0 +1,31 @@
+body {
+    font-size: 1em;
+
+    margin: auto;
+    width: 550px;
+
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+table, th, td {
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+}
+
+table {
+    width: 100%;
+}
+
+th, td {
+    padding: 5px 10px 5px 10px;
+}
+
+pre code {
+  background-color: #eee;
+  border: 1px solid #999;
+  display: block;
+  padding: 20px;
+  margin-bottom: -20px;
+}

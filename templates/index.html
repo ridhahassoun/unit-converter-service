@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unit Converter API</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main>
+        <h2>Unit Converter API</h2>
+        <p>Welcome to the Unit Converter API microservice, provided for use by 
+            The Five Eyes, a team for CS361: Software Engineering I at Oregon 
+            State University.</p>
+        <h3>How to Use</h3>
+        <p>Make an HTTP POST request to <code>/api/</code> with a JSON object that
+            contains the following name/value pairs:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>type</code></td>
+                    <td>One of the three types currently supported: <code>length</code>, <code>weight</code>, and <code>temp</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>from</code></td>
+                    <td>
+                        A dictionary containing the following name/value pairs:
+                        <ul>
+                            <li>
+                                <code>units</code>: The unit of the value you want to convert from. See below for supported units within each type.
+                            </li>
+                            <li>
+                                <code>value</code>: The value, either as an integer or a float.
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>to</code></td>
+                    <td>The unit you want to convert to. See below for supported conversions within each type.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h4>Example Usage</h4>
+        <p>If you wanted to convert 26 inches to centimeters, you would make a 
+            HTTP POST with the following JSON object:</p>
+        <pre>
+            <code>
+{
+    "type": "length",
+    "from": {
+        "units": "in"
+        "value": 26
+    },
+    "to": "cm"
+}
+            </code>
+        </pre>
+        <h4>Response</h4>
+        <p>The response to the above request would result in the following JSON
+            object response:</p>
+        <pre>
+            <code>
+{
+    "type": "length",
+    "from": {
+        "units": "in"
+        "value": 26
+    },
+    "to": "cm",
+    "result": 66.04
+}
+            </code>
+        </pre>
+        <h3>Supported Units</h3>
+        <h4>Length</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Unit</th>
+                    <th>Abbreviation Used</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mile</td>
+                    <td>mi</td>
+                </tr>
+                <tr>
+                    <td>Yard</td>
+                    <td>yd</td>
+                </tr>
+                <tr>
+                    <td>Foot</td>
+                    <td>ft</td>
+                </tr>
+                <tr>
+                    <td>Inch</td>
+                    <td>in</td>
+                </tr>
+                <tr>
+                    <td>Kilometer</td>
+                    <td>km</td>
+                </tr>
+                <tr>
+                    <td>Meter</td>
+                    <td>m</td>
+                </tr>
+                <tr>
+                    <td>Centimeter</td>
+                    <td>cm</td>
+                </tr>
+                <tr>
+                    <td>Millimeter</td>
+                    <td>mm</td>
+                </tr>
+            </tbody>
+        </table>
+        <h4>Weight</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Unit</th>
+                    <th>Abbreviation Used</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>US Ton</td>
+                    <td>ton</td>
+                </tr>
+                <tr>
+                    <td>Pound</td>
+                    <td>lb</td>
+                </tr>
+                <tr>
+                    <td>Ounce</td>
+                    <td>oz</td>
+                </tr>
+                <tr>
+                    <td>Kilogram</td>
+                    <td>kg</td>
+                </tr>
+                <tr>
+                    <td>Gram</td>
+                    <td>g</td>
+                </tr>
+                <tr>
+                    <td>Milligram</td>
+                    <td>mg</td>
+                </tr>
+            </tbody>
+        </table>
+        <h4>Temperature</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Unit</th>
+                    <th>Abbreviation Used</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Celsius</td>
+                    <td>c</td>
+                </tr>
+                <tr>
+                    <td>Fahrenheit</td>
+                    <td>f</td>
+                </tr>
+                <tr>
+                    <td>Kelvin</td>
+                    <td>k</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+    </main>
+</body>
+</html>
