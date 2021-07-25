@@ -53,7 +53,7 @@
 {
     "type": "length",
     "from": {
-        "units": "in"
+        "units": "in",
         "value": 26
     },
     "to": "cm"
@@ -68,7 +68,7 @@
 {
     "type": "length",
     "from": {
-        "units": "in"
+        "units": "in",
         "value": 26
     },
     "to": "cm",
@@ -77,6 +77,9 @@
             </code>
         </pre>
         <h3>Supported Units</h3>
+        <p>Note: The API does not support converting a unit to itself. For example,
+            if both the <code>from</code> and <code>to</code> units were set to "f", 
+            the API will return an error.</p>
         <h4>Length</h4>
         <table>
             <thead>
