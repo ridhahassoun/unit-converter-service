@@ -45,7 +45,7 @@
                 </tr>
             </tbody>
         </table>
-        <h4>Example Usage</h4>
+        <h5>Example Usage</h5>
         <p>If you wanted to convert 26 inches to centimeters, you would make a 
             HTTP POST with the following JSON object:</p>
         <pre>
@@ -60,7 +60,7 @@
 }
             </code>
         </pre>
-        <h4>Response</h4>
+        <h5>Response</h5>
         <p>The response to the above request would result in the following JSON
             object response:</p>
         <pre>
@@ -73,6 +73,65 @@
     },
     "to": "cm",
     "result": 66.04
+}
+            </code>
+        </pre>
+        <h4>Batch Conversions</h4>
+        <p>The API also supports batch conversions, allowing you to perform multiple
+            conversions in a single request. To do so, include <code>"multiple": true</code>
+            and zero-indexed key/value pairs, with the value in the same format 
+            as described above. See the following example for more details.</p>
+        <h5>Example Usage</h5>
+        <p>The following example illustrates how to use the API to perform batch
+        conversion:</p>
+        <pre>
+            <code>
+{
+    "multiple": true,
+    "0": {
+        "type": "length",
+        "from": {
+            "units": "in",
+            "value": 26
+        },
+        "to": "cm"
+    },
+    "1": {
+        "type": "length", 
+        "from": {
+            "units": "mi", 
+            "value": 3.4
+        }, 
+        "to": "ft"
+    }
+}
+            </code>
+        </pre>
+        <h5>Response</h5>
+        <p>The response to the above request would result in the following JSON
+            object response:</p>
+        <pre>
+            <code>
+{
+    "multiple": true,
+    "0": {
+        "type": "length",
+        "from": {
+            "units": "in",
+            "value": 26
+        },
+        "to": "cm",
+        "result": 66.04
+    },
+    "1": {
+        "type": "length", 
+        "from": {
+            "units": "mi", 
+            "value": 3.4
+        }, 
+        "to": "ft",
+        "result": 17952.0
+    }
 }
             </code>
         </pre>
