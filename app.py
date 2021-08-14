@@ -7,18 +7,24 @@ CORS(app)
 
 
 def process_data(data):
-    conversion_dict = types[data["type"]]
-    conversion_from = conversion_dict[data["from"]["units"]]
-    conversion = conversion_from[data["to"]]
+    # gets appropriate conversion dict
+    # see conversions.py
+    conversion_table = types[data["type"]]
+    unit_converting_from = conversion_table[data["from"]["units"]]
+    conversion_factor = unit_converting_from[data["to"]]
 
     value = data["from"]["value"]
     if not (isinstance(value, int) or isinstance(value, float)):
+        # only dealing with numbers here
         raise TypeError
 
     if data["type"] == "temp":
-        result = conversion(value)
+        # temperature conversion is more complex, so requires a lambda function
+        # stored in conversions.py, hence the function call
+        result = conversion_factor(value)
     else:
-        result = conversion * data["from"]["value"]
+        # everything else is simply multiplying by ratio
+        result = conversion_factor * data["from"]["value"]
 
     data["result"] = result
 
@@ -33,16 +39,18 @@ def index():
 @app.route("/api/", methods=["POST"])
 def api():
     if request.method == "POST" and request.mimetype == "application/json":
-        data = request.get_json(silent=True)
+        data = request.get_json(silent=True)  # silent to force parsing
         if data:
             try:
                 if "multiple" in data:
+                    # if multiple flag set, we loop through object and convert
                     number_of_conversions = len(data) - 1
                     for index in range(number_of_conversions):
                         processed_data = process_data(data[str(index)])
                         data[str(index)] = processed_data
                     return data
                 else:
+                    # just perform one conversion
                     return process_data(data)
             except KeyError as e:
                 return {"Error":
